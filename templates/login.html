@@ -76,11 +76,10 @@
       {%- endif %}
   </div>
   </div>
-  <div class="login-container text-center">
-    {% block login %}
-    {{ super() }}
-    {% endblock %}
   </div>
+  {% block login %}
+  {{ super() }}
+  {% endblock %}
 
   <div class="row col-md-8 mx-auto details">
     <div class="col-md-6">
