@@ -5,8 +5,17 @@
 {% endblock %}
 
 {% block stylesheet %}
+{% if custom.redirect_to %}
+<style>
+/* Hide the default modal that shows up in the JupyterHub home page */
+.fade {
+  display: none;
+}
+</style>
+{% else %}
 {{ super() }}
 <link rel="stylesheet" href="{{ static_url('extra-assets/css/login.css') }}" type="text/css"/>
+{% endif %}
 {% endblock %}
 
 {% block script %}
@@ -40,6 +49,7 @@
 {% endblock %}
 
 {% block main %}
+{% if not custom.redirect_to %}
 <div class="container login-header" id="home" data-authenticator-login-url="{{authenticator_login_url}}">
   <div class="text-center">
     <p class="hub-login-text">The 2i2c JupyterHub for <a href="{{ custom.org.url }}" class="text-decoration-none" > {{ custom.org.name }}</a></p><br />
@@ -192,4 +202,5 @@
       </p>
   </div>
 </div>
+{% endif %}
 {% endblock %}
