@@ -5,16 +5,34 @@
 {% endblock %}
 
 {% block stylesheet %}
+{% if custom.redirect_to %}
+<style>
+/* Hide the default modal that shows up in the JupyterHub home page */
+.fade {
+  display: none;
+}
+</style>
+{% else %}
 {{ super() }}
 <link rel="stylesheet" href="{{ static_url('extra-assets/css/login.css') }}" type="text/css"/>
+{% endif %}
 {% endblock %}
 
 {% block script %}
+{% if custom.redirect_to %}
+<script>
+    // Let's give users an indication that something is happening
+    document.write("Redirecting you to {{custom.redirect_to}}");
+    window.location.href = {{custom.redirect_to|tojson}};
+</script>
+{% else %}
 {{ super() }}
 <script src="{{ static_url('extra-assets/js/login.js') }}"></script>
+{% endif %}
 {% endblock %}
 
 {% block main %}
+{% if not custom.redirect_to %}
 <div class="container login-header" id="home" data-authenticator-login-url="{{authenticator_login_url}}">
   <div class="text-center">
     <p class="hub-login-text">The 2i2c JupyterHub for <a href="{{ custom.org.url }}">{{ custom.org.name }}</a></p><br />
@@ -155,4 +173,5 @@
       </p>
   </div>
 </div>
+{% endif %}
 {% endblock %}
