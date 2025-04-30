@@ -6,45 +6,46 @@
 
 {% block stylesheet %}
 {{ super() }}
-<link rel="stylesheet" href="{{ static_url('extra-assets/css/login.css') }}" type="text/css"/>
-{% endblock %}
-
-{% block script %}
-{{ super() }}
-<script src="{{ static_url('extra-assets/js/login.js') }}"></script>
+<style>
+  #login-main {
+    /* Upstream JupyterHub sets this to a very high vh for some reason
+       Let's remove that upstream and get rid of this style tag too.
+     */
+    height: auto;
+  }
+</style>
 {% endblock %}
 
 {% block main %}
-<div class="container login-header" id="home" data-authenticator-login-url="{{authenticator_login_url}}">
+<div class="container mt-4" id="home" data-authenticator-login-url="{{authenticator_login_url}}">
   <div class="text-center">
-    <p class="hub-login-text">The 2i2c JupyterHub for <a href="{{ custom.org.url }}">{{ custom.org.name }}</a></p><br />
+    <h2>The 2i2c JupyterHub for <a href="{{ custom.org.url }}">{{ custom.org.name }}</a></h2><br />
     <a href="{{ custom.org.url }}">
-      <img src="{{ custom.org.logo_url }}" alt="{{ custom.org.name }} logo" class='hub-logo'
+      <img src="{{ custom.org.logo_url }}" alt="{{ custom.org.name }} logo" width="40%"
         title='hub logo' />
     </a>
-  <div id="operated-by">
-      Operated by: <a href="{{ custom.operated_by.url }}">{{ custom.operated_by.name }}</a> |
-      Funded by: <a href="{{ custom.funded_by.url }}">{{ custom.funded_by.name }}</a> |
-      Designed by: <a href="{{ custom.designed_by.url }}">{{ custom.designed_by.name }}</a>
+  <div class="mt-4 text-muted">
+      Operated by: <strong><a href="{{ custom.operated_by.url }}">{{ custom.operated_by.name }}</a></strong> |
+      Funded by: <strong><a href="{{ custom.funded_by.url }}">{{ custom.funded_by.name }}</a></strong> |
+      Designed by: <strong><a href="{{ custom.designed_by.url }}">{{ custom.designed_by.name }}</a></strong>
   </div>
   </div>
-  <div id="login-main" class="container">
+  <div id="login-main" class="container mt-4">
     {% block login_container %}
     {{ super() }}
     {% endblock %}
   </div>
 
-  <div class="col-md-8 col-md-offset-2 details">
-    <div class="col-md-6">
-      <big class="details-welcome lead">
-      Welcome to the <a href="{{ custom.org.url }}">{{ custom.org.name }}</a> <strong>2i2c JupyterHub</strong>.
-      </big>
-      <br />
-      <br />
-      This is a pilot service running on open source infrastructure.
-      See <a href="https://2i2c.org/pilot">the 2i2c Pilot documentation</a> for usage and deployment information.</p>
+  <div class="row mt-4 pt-4">
+    <div class="col-md-8">
+      <h3>
+        Welcome to the <a href="{{ custom.org.url }}">{{ custom.org.name }}</a> <strong>2i2c JupyterHub</strong>.
+      </h3>
+      <p>
+        This is a JupyterHub service running on <a href="https://github.com/2i2c-org/infrastructure">open source infrastructure</a>.
+      </p>
     </div>
-    <div class="col-md-6 details-logos">
+    <div class="col-md-4">
       <div class="pull-right">
         <a href="https://jupyter.org">
           <img src="{{static_url("extra-assets/images/jupyter-logo.svg") }}" alt='Jupyter' height="64" />
@@ -56,20 +57,19 @@
         </a>
       </div>
     </div>
-
   </div>
 
   {% if custom.announcements is defined %}
-    <div class="col-md-8 col-md-offset-2 announcements" >
+    <div class="row">
       {% for announcement in custom.announcements %}
-      <div class="announcements-text">
+      <div class="col-12 border border-secondary">
         {{ announcement | safe }}
       </div>
       {% endfor %}
     </div>
   {% endif %}
 
-  <div class="col-md-8 col-md-offset-2 questions">
+  <div class="row">
     <div>
       <h4>Where can I learn more?</h4>
 
@@ -100,17 +100,16 @@
       <h4>Who can use this service?</h4>
 
       This JupyterHub service is open to anyone that a hub administrator has approved.
-      Generally this means instructors and students. As this
-      is a proof-of-concept service, students should ensure they are backing up
+      Students should ensure they are backing up
       their notebooks regularly if they are using this service for course
       activities.
     </div>
 
-  <div class="footer">
+  <div class="row p-4 m-4 text-center text-muted">
     <p>
       This service is run transparently from
-      <a href="https://github.com/2i2c-org/pilot-hubs">
-        github.com/2i2c-org/pilot-hubs
+      <a href="https://github.com/2i2c-org/infrastructure">
+        github.com/2i2c-org/infrastructure
       </a>
     </p>
     <p>
