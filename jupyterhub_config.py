@@ -23,8 +23,9 @@ c.JupyterHub.authenticator_class = GenericOAuthenticator
 # Variables that are passed through to templates!
 c.JupyterHub.template_vars = {
     'custom': {
+        "redirect_to": None,
         "interface_selector": True,
-        "default_url": "/rstudio",
+        "default_url": "/lab",
         'org': {
             'name': 'University of Foo',
             'logo_url': 'https://jupyter.org/assets/nav_logo.svg',
@@ -32,17 +33,18 @@ c.JupyterHub.template_vars = {
         },
         'operated_by': {
             'name': 'Operating Org',
-            'url': 'https://2i2c.org',
+            'url': 'https://cal-icor.org',
             'custom_html': '',
         },
         'funded_by': {
-            'name': '',
-            'url': '',
+            'name': 'California Learning Lab',
+            'logo_url': 'https://calearninglab.org/wp-content/uploads/2022/02/CA-Learning-Lab-Logo-Color.png',
+            'url': 'https://calearninglab.org/',
             'custom_html': 'Funding <i>Org</i>',
         },
         'designed_by': {
-            'name': 'Funding Org',
-            'url': 'https://2i2c.org',
+            'name': 'Cal-ICOR',
+            'url': 'https://cal-icor.org',
             'custom_html': '',
         }
     }

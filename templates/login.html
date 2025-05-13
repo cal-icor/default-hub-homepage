@@ -4,42 +4,81 @@
 {% endblock %}
 
 {% block stylesheet %}
+{% if custom.redirect_to %}
+<style>
+/* Hide the default modal that shows up in the JupyterHub home page */
+.fade {
+  display: none;
+}
+</style>
+{% else %}
 {{ super() }}
 <link rel="stylesheet" href="{{ static_url('extra-assets/css/login.css') }}" type="text/css"/>
+{% endif %}
 {% endblock %}
 
 {% block script %}
+{% if custom.redirect_to %}
+<script>
+    // This code must be run *as early as possible*, as we care about redirecting the user
+    // *somewhere* immediately. So this isn't wrapped in a window.onload or similar, but bare.
+    // This code is also loaded directly in <head>, so it will block page load.
+    const curUrl = new URL(document.location);
+    // if next query param is presentm just do nothing
+    const nextUrl = curUrl.searchParams.get('next');
+    // /hub/ being next should be treated same as no next present
+    if (!nextUrl || nextUrl === "/hub/") {
+        // The 'unified' home page for all the hubs is elsewhere
+        // so anyone landing on the home page should just be redirected.
+        window.location.replace({{custom.redirect_to|tojson}});
+    } else {
+        // The user has landed on this page, which means they are not actually logged in,
+        // and need to login to continue to wherever they are going. So let's construct the
+        // appropriate oauth_login URL for them to go to.
+        let oauthLoginUrl = new URL(document.location);
+        // Pass along all url parameters we got, just change from /login to /oauth_login
+        oauthLoginUrl.pathname = "/oauth_login";
+        window.location.replace(oauthLoginUrl);
+    }
+</script>
+{% else %}
 {{ super() }}
 <script src="{{ static_url('extra-assets/js/login.js') }}"></script>
+{% endif %}
 {% endblock %}
 
 {% block main %}
 <div class="container login-header" id="home">
   <div class="text-center">
-    <p class="hub-login-text">The 2i2c JupyterHub for <a href="{{ custom.org.url }}" class="text-decoration-none" > {{ custom.org.name }}</a></p><br />
+    <p class="hub-login-text">The Cal-ICOR JupyterHub for <a href="{{ custom.org.url }}" class="text-decoration-none" > {{ custom.org.name }}</a></p><br />
     <a href="{{ custom.org.url }}">
       <img src="{{ custom.org.logo_url }}" alt="{{ custom.org.name }} logo" class='hub-logo'
         title='hub logo' />
     </a>
-  <div id="operated-by">
-      {%- if custom.operated_by.custom_html %}
-      Operated by: {{ custom.operated_by.custom_html | safe }} |
-      {%- else %}
-      Operated by: <a href="{{ custom.operated_by.url }}" class="text-decoration-none">{{ custom.operated_by.name }}</a> |
-      {%- endif %}
+    <div id="operated-by">
+        {%- if custom.operated_by.custom_html %}
+        Operated by: {{ custom.operated_by.custom_html | safe }} |
+        {%- else %}
+        Operated by: <a href="{{ custom.operated_by.url }}">{{ custom.operated_by.name }}</a> |
+        {%- endif %}
 
-      {%- if custom.funded_by.custom_html %}
-      Funded by: {{ custom.funded_by.custom_html | safe }} |
-      {%- else %}
-      Funded by: <a href="{{ custom.funded_by.url }}" class="text-decoration-none">{{ custom.funded_by.name }}</a> |
-      {%- endif %}
+        {%- if custom.funded_by.custom_html %}
+        Funded by: {{ custom.funded_by.custom_html | safe }} |
+        {%- else %}
+        Funded by: <a href="{{ custom.funded_by.url }}">{{ custom.funded_by.name }}</a> |
+        {%- endif %}
 
-      {%- if custom.designed_by.custom_html %}
-      Designed by: {{ custom.designed_by.custom_html | safe }}
-      {%- else %}
-      Designed by: <a href="{{ custom.designed_by.url }}" class="text-decoration-none">{{ custom.designed_by.name }}</a>
-      {%- endif %}
-  </div>
+        {%- if custom.designed_by.custom_html %}
+        Designed by: {{ custom.designed_by.custom_html | safe }}
+        {%- else %}
+        Designed by: <a href="{{ custom.designed_by.url }}">{{ custom.designed_by.name }}</a>
+        {%- endif %}
+    </div>
+    <div id="login-main" class="container">
+      {% block login_container %}
+      {{ super() }}
+      {% endblock %}
+    </div>
   </div>
   <div class="login-container text-center">
     <div id="login-main" class="container">
@@ -53,12 +92,12 @@
   <div class="row col-md-8 mx-auto details">
     <div class="col-md-6">
       <big class="details-welcome lead">
-      Welcome to the <a href="{{ custom.org.url }}" class="text-decoration-none">{{ custom.org.name }}</a> <strong>2i2c JupyterHub</strong>.
+      Welcome to the <a href="{{ custom.org.url }}" class="text-decoration-none">{{ custom.org.name }}</a> <strong>Cal-ICOR JupyterHub</strong>.
       </big>
       <br />
       <br />
-      This is a pilot service running on open source infrastructure.
-      See <a href="https://2i2c.org/pilot" class="text-decoration-none">the 2i2c Pilot documentation</a> for usage and deployment information.</p>
+      This is a free service running on open source infrastructure.
+      See <a href="https://docs.cal-icor.org" class="text-decoration-none">the Cal-ICOR documentation</a> for usage and deployment information.</p>
     </div>
     <div class="col-md-6 details-logos">
       <div class="float-end">
@@ -92,7 +131,7 @@
       {% if custom.learn_more is defined %}
         {{ custom.learn_more | safe }}
       {% else %}
-        The <a href="https://2i2c.org/pilot" class="text-decoration-none">2i2c Pilot Hubs Documentation</a> has all of the information that you need to use the hub, as well as information about the deployment technology.
+        The <a href="https://docs.cal-icor.org" class="text-decoration-none">Cal-ICOR Hubs Documentation</a> has all of the information that you need to use the hub, as well as information about the deployment technology.
       {% endif %}
     </div>
     <div>
@@ -129,8 +168,8 @@
   <div class="footer">
     <p>
       This service is run transparently from
-      <a href="https://github.com/2i2c-org/pilot-hubs">
-        github.com/2i2c-org/pilot-hubs
+      <a href="https://github.com/cal-icor/cal-icor-hubs">
+        github.com/cal-icor/cal-icor-hubs
       </a>
     </p>
     <p>
@@ -143,4 +182,5 @@
       </p>
   </div>
 </div>
+{% endif %}
 {% endblock %}

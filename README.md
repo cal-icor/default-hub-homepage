@@ -1,4 +1,4 @@
-# Custom JupyterHub templates for 2i2c hubs
+# Custom JupyterHub templates for Cal-ICOR hubs
 
 This repo contains html jinja2 templates for customizing the appearance of JupyterHub. Each HTML file here will override the files in `https://github.com/jupyterhub/jupyterhub/tree/master/share/jupyter/hub/templates`.
 
@@ -6,19 +6,24 @@ Any changes made in this repository will be reflected in the JupyterHub within 5
 
 ## General, out of the box variations to the default homepage via existing branches
 
-In this repositories there are some branches that provide alternatives to the default 2i2c landing page, but without being specific to a certain community hub. These are:
+In this repositories there are some branches that provide alternatives to the default Cal-ICOR landing page, but without being specific to a certain community hub. These are:
 
-1. **The [username-and-password-homepage](https://github.com/2i2c-org/default-hub-homepage/tree/username-and-password-homepage) branch**
+1. **The [username-and-password-homepage](https://github.com/cal-icor/default-hub-homepage/tree/username-and-password-homepage) branch**
 
    This branch allows username and password input fields instead of the regular login single button, along with providing specific info about and for each community.
 
    This branch is useful for hubs that instead of an OAuth2 based authenticator want to use a username and password one.
 
-2. **The [no-homepage-subsections](https://github.com/2i2c-org/default-hub-homepage/tree/no-homepage-subsections) branch**
+2. **The [no-homepage-subsections](https://github.com/cal-icor/default-hub-homepage/tree/no-homepage-subsections) branch**
 
    This branch removes all the sub-sections that follow the login button, including the interface choice.
 
    This branch is useful for hubs that might serve a binderhub-style page right after login instead of the spawning regular UI. In this case, the sections after the login button are not that relevant and removing them makes expectations more clear.
+
+3. **The [bootstrap5](https://github.com/cal-icor/default-hub-homepage/tree/bootstrap5) branch**
+
+   This branch is compatible with bootstrap5 and implicitly with JupyterHub >= version 5.0.0
+   Use this branch if your hub is using this version, otherwise the pages will not render nicely.
 
 
 ## Local development
@@ -59,23 +64,23 @@ You can run a local JupyterHub to test your login template changes.
 
 ### 2. Test other template changes
 
-If you create a branch in this repository with a name that matches `<cluster-name>`-`<hub-name>`in the [2i2c hubs repository](https://github.com/2i2c-org/infrastructure/tree/HEAD/config/clusters), then the changes in this branch will be reflected on that cluster and hub. This can be used either for testing (if this branch gets deleted once the changes have been merged into the main branch), or for having specific homepage customizations per hub.
+If you create a branch in this repository with a name that matches `<cluster-name>`-`<hub-name>`in the [Cal-ICOR hubs repository](https://github.com/cal-icor/cal-icor-hubs/tree/HEAD/deployments), then the changes in this branch will be reflected on that cluster and hub. This can be used either for testing (if this branch gets deleted once the changes have been merged into the main branch), or for having specific homepage customizations per hub.
 
 **Steps for testing changes on staging:**
 
-1. From the local branch where you have your changes committed, create a new branch called `2i2c-staging`:
+1. From the local branch where you have your changes committed, create a new branch called `calicor-staging`:
 
    ```bash
-   git checkout -b 2i2c-staging
+   git checkout -b calicor-staging
    ```
 
-2. Push the local `2i2c-staging` branch to the remote repository:
+2. Push the local `calicor-staging` branch to the remote repository:
 
    ```bash
-   git push <remote> 2i2c-staging
+   git push <remote> calicor-staging
    ```
 
-2. Go to the [infrastructure repository](https://github.com/2i2c-org/infrastructure) and update the 2i2c staging hub config to track this new branch (if not already).
+2. Go to the [hubs repository](https://github.com/cal-icor/cal-icor-hubs) and update the Jupyter staging hub config to track this new branch (if not already).
 
    Follow the example at https://infrastructure.2i2c.org/en/latest/howto/features/login-page.html about how to set the `jupyterhub.custom.homepage.gitRepoBranch` config.
 
