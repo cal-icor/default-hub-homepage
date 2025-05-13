@@ -1,0 +1,10 @@
+# vi
+**/*.swp
+
+# python
+**/__pycache__
+**/*.pyc
+
+# random stuff
+**/.DS_Store
+**/*.bak
