@@ -52,7 +52,7 @@
 {% if not custom.redirect_to %}
 <div class="container login-header" id="home" data-authenticator-login-url="{{authenticator_login_url}}">
   <div class="text-center">
-    <p class="hub-login-text">The 2i2c JupyterHub for <a href="{{ custom.org.url }}" class="text-decoration-none" > {{ custom.org.name }}</a></p><br />
+    <p class="hub-login-text">The Cal-ICOR JupyterHub for <a href="{{ custom.org.url }}" class="text-decoration-none" > {{ custom.org.name }}</a></p><br />
     <a href="{{ custom.org.url }}">
       <img src="{{ custom.org.logo_url }}" alt="{{ custom.org.name }} logo" class='hub-logo'
         title='hub logo' />
@@ -112,12 +112,12 @@
   <div class="row col-md-8 mx-auto details">
     <div class="col-md-6">
       <big class="details-welcome lead">
-      Welcome to the <a href="{{ custom.org.url }}" class="text-decoration-none">{{ custom.org.name }}</a> <strong>2i2c JupyterHub</strong>.
+      Welcome to the <a href="{{ custom.org.url }}" class="text-decoration-none">{{ custom.org.name }}</a> <strong>Cal-ICOR JupyterHub</strong>.
       </big>
       <br />
       <br />
-      This is a pilot service running on open source infrastructure.
-      See <a href="https://2i2c.org/pilot" class="text-decoration-none">the 2i2c Pilot documentation</a> for usage and deployment information.</p>
+      This is a free service running on open source infrastructure.
+      See <a href="https://docs.cal-icor.org" class="text-decoration-none">the Cal-ICOR documentation</a> for usage and deployment information.</p>
     </div>
     <div class="col-md-6 details-logos">
       <div class="float-end">
@@ -151,7 +151,7 @@
       {% if custom.learn_more is defined %}
         {{ custom.learn_more | safe }}
       {% else %}
-        The <a href="https://2i2c.org/pilot" class="text-decoration-none">2i2c Pilot Hubs Documentation</a> has all of the information that you need to use the hub, as well as information about the deployment technology.
+        The <a href="https://docs.cal-icor.org" class="text-decoration-none">Cal-ICOR Hubs Documentation</a> has all of the information that you need to use the hub, as well as information about the deployment technology.
       {% endif %}
     </div>
     <div>
@@ -188,8 +188,8 @@
   <div class="footer">
     <p>
       This service is run transparently from
-      <a href="https://github.com/2i2c-org/pilot-hubs">
-        github.com/2i2c-org/pilot-hubs
+      <a href="https://github.com/cal-icor/cal-icor-hubs">
+        github.com/cal-icor/cal-icor-hubs
       </a>
     </p>
     <p>
