@@ -48,12 +48,6 @@
 {% endblock %}
 
 {% block main %}
-<style>
-  #login-main {
-    display: table;
-    height: 50vh;
-  }
-</style>
 <div class="container login-header" id="home">
   <div class="text-center">
     <p class="hub-login-text">The Cal-ICOR JupyterHub for <a href="{{ custom.org.url }}" class="text-decoration-none" > {{ custom.org.name }}</a></p><br />
@@ -86,7 +80,14 @@
       {% endblock %}
     </div>
   </div>
+  <div class="login-container text-center">
+    <div id="login-main" class="container">
+      {% block login_container %}
+      {{ super() }}
+      {% endblock %}
+    </div>
   </div>
+</div>
 
   <div class="row col-md-8 mx-auto details">
     <div class="col-md-6">
