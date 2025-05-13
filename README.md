@@ -8,19 +8,19 @@ Any changes made in this repository will be reflected in the JupyterHub within 5
 
 In this repositories there are some branches that provide alternatives to the default Cal-ICOR landing page, but without being specific to a certain community hub. These are:
 
-1. **The [username-and-password-homepage](https://github.com/cal-icor-org/default-hub-homepage/tree/username-and-password-homepage) branch**
+1. **The [username-and-password-homepage](https://github.com/cal-icor/default-hub-homepage/tree/username-and-password-homepage) branch**
 
    This branch allows username and password input fields instead of the regular login single button, along with providing specific info about and for each community.
 
    This branch is useful for hubs that instead of an OAuth2 based authenticator want to use a username and password one.
 
-2. **The [no-homepage-subsections](https://github.com/cal-icor-org/default-hub-homepage/tree/no-homepage-subsections) branch**
+2. **The [no-homepage-subsections](https://github.com/cal-icor/default-hub-homepage/tree/no-homepage-subsections) branch**
 
    This branch removes all the sub-sections that follow the login button, including the interface choice.
 
    This branch is useful for hubs that might serve a binderhub-style page right after login instead of the spawning regular UI. In this case, the sections after the login button are not that relevant and removing them makes expectations more clear.
 
-3. **The [bootstrap5](https://github.com/cal-icor-org/default-hub-homepage/tree/bootstrap5) branch**
+3. **The [bootstrap5](https://github.com/cal-icor/default-hub-homepage/tree/bootstrap5) branch**
 
    This branch is compatible with bootstrap5 and implicitly with JupyterHub >= version 5.0.0
    Use this branch if your hub is using this version, otherwise the pages will not render nicely.
