@@ -80,20 +80,20 @@ If you create a branch in this repository with a name that matches `<cluster-nam
    git push <remote> calicor-staging
    ```
 
-2. Go to the [hubs repository](https://github.com/cal-icor/cal-icor-hubs) and update the Jupyter staging hub config to track this new branch (if not already).
+3. Go to the [hubs repository](https://github.com/cal-icor/cal-icor-hubs) and update the Jupyter staging hub config to track this new branch (if not already).
 
    Follow the example at https://infrastructure.2i2c.org/en/latest/howto/features/login-page.html about how to set the `jupyterhub.custom.homepage.gitRepoBranch` config.
 
    Open a PR against that repo with the changes if any.
 
-3. It should take around 5min to see your changes on the staging hub at `https://staging.pilot.2i2c.cloud` after the PR against the infrastructure repository has been merged.
+4. It should take around 5min to see your changes on the staging hub at `https://staging.jupyter.cal-icor.org` after the PR against the infrastructure repository has been merged.
 
-4. After you've checked that everything works, merge the `2i2c-staging` branch into the main branch of this repository if you want the changes to be deployed to the other hubs too after around 5min.
+5. After you've checked that everything works, merge the `calicor-staging` branch into the main branch of this repository if you want the changes to be deployed to the other hubs too after around 5min.
 
-5. Delete the remote staging branch, either from the GitHub GUI, or using:
+6. Delete the remote staging branch, either from the GitHub GUI, or using:
 
    ```bash
-   git branch git push -d <remote> 2i2c-staging
+   git branch git push -d <remote> calicor-staging
    ```
 
 **NOTE**
