@@ -52,11 +52,7 @@
 {% if not custom.redirect_to %}
 <div class="container login-header" id="home" data-authenticator-login-url="{{authenticator_login_url}}">
   <div class="text-center">
-    <p class="hub-login-text">The Cal-ICOR JupyterHub for <a href="{{ custom.org.url }}" class="text-decoration-none" > {{ custom.org.name }}</a></p><br />
-    <a href="{{ custom.org.url }}">
-      <img src="{{ custom.org.logo_url }}" alt="{{ custom.org.name }} logo" class='hub-logo'
-        title='hub logo' />
-    </a>
+    <p class="hub-login-text">The Cal-ICOR JupyterHub for {{ custom.org.name }}</p><br />
   <div id="operated-by">
       {%- if custom.operated_by.custom_html %}
       Operated by: {{ custom.operated_by.custom_html | safe }} |
@@ -111,11 +107,6 @@
 
   <div class="row col-md-8 mx-auto details">
     <div class="col-md-6">
-      <big class="details-welcome lead">
-      Welcome to the <a href="{{ custom.org.url }}" class="text-decoration-none">{{ custom.org.name }}</a> <strong>Cal-ICOR JupyterHub</strong>.
-      </big>
-      <br />
-      <br />
       This is a free service running on open source infrastructure.
       See <a href="https://docs.cal-icor.org" class="text-decoration-none">the Cal-ICOR documentation</a> for usage and deployment information.</p>
     </div>
